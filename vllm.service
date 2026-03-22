@@ -1,0 +1,23 @@
+[Unit]
+Description=vLLM - Qwen3.5-122B-A10B-NVFP4 inference server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/vijay/llm-serve
+ExecStart=/home/vijay/llm-serve/start-vllm.sh
+Restart=on-failure
+RestartSec=10
+TimeoutStartSec=1200
+StandardOutput=append:/home/vijay/llm-serve/logs/vllm.log
+StandardError=append:/home/vijay/llm-serve/logs/vllm.log
+Environment=HOME=/home/vijay
+Environment=PATH=/home/vijay/miniconda3/envs/llm/bin:/usr/local/cuda/bin:/usr/local/bin:/usr/bin:/bin
+Environment=VLLM_WORKER_MULTIPROC_METHOD=spawn
+# Suppress false-positive FLA shape warning on short prompts (seq_len < num_heads=64).
+# Set here to ensure the spawned EngineCore subprocess inherits it.
+Environment=PYTHONWARNINGS=ignore::UserWarning:vllm.model_executor.layers.fla
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,18 @@
+[Unit]
+Description=LiteLLM Proxy - OpenAI-compatible gateway for local network
+After=network-online.target vllm.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/vijay/llm-serve
+ExecStart=/home/vijay/llm-serve/start-litellm.sh
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/home/vijay/llm-serve/logs/litellm.log
+StandardError=append:/home/vijay/llm-serve/logs/litellm.log
+Environment=HOME=/home/vijay
+Environment=PATH=/home/vijay/miniconda3/envs/llm/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=default.target

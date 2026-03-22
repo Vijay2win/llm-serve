@@ -1,0 +1,32 @@
+model_list:
+  - model_name: qwen3.5-122b
+    litellm_params:
+      model: openai/qwen3.5-122b
+      api_base: http://localhost:8000/v1
+      api_key: "not-needed"
+    model_info:
+      description: "Qwen3.5-122B NVFP4 — thinking on by default, disable per-request with enable_thinking: false"
+      max_input_tokens: 204800
+      max_output_tokens: 32768
+
+  - model_name: qwen3.5-122b-no-thinking
+    litellm_params:
+      model: openai/qwen3.5-122b
+      api_base: http://localhost:8000/v1
+      api_key: "not-needed"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: false
+    model_info:
+      description: "Qwen3.5-122B NVFP4 — thinking disabled, faster responses"
+      max_input_tokens: 204800
+      max_output_tokens: 32768
+
+litellm_settings:
+  drop_params: true
+  set_verbose: false
+
+general_settings:
+  master_key: "sk-local-llm"
+  # database_url is set via DATABASE_URL env var in start-litellm.sh
+  disable_spend_logs: false

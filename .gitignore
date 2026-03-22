@@ -1,0 +1,32 @@
+# Logs
+logs/
+
+# Runtime state
+*.pid
+pgdata/
+
+# Secrets and local config overrides
+.env
+*.key
+*.secret
+
+# Build artifacts
+vllm-build.log
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+
+# Editor
+*.swp
+*~
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
