@@ -176,7 +176,7 @@ curl http://localhost:4000/v1/chat/completions \
   -H "Authorization: Bearer sk-local-llm" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "qwen3.5-122b",
+    "model": "openai/qwen3.5-122b-thinking",
     "messages": [{"role": "user", "content": "Explain the P vs NP problem"}],
     "max_tokens": 4096
   }'

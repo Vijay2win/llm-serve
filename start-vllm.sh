@@ -36,4 +36,8 @@ exec "$HOME/miniconda3/envs/llm/bin/python" -m vllm.entrypoints.openai.api_serve
     --enforce-eager \
     --reasoning-parser qwen3 \
     --default-chat-template-kwargs '{"enable_thinking": true}' \
+    --api-key "sk-spark-llm" \
+    --limit-mm-per-prompt '{"image": 5, "video": 1}' \
+    --enable-auto-tool-choice \
+    --tool-call-parser qwen3_xml \
     --trust-remote-code
