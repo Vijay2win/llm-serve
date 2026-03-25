@@ -188,8 +188,8 @@ curl http://localhost:4000/v1/chat/completions \
 
 | Alias | Thinking |
 |---|---|
-| `qwen3.5-122b` | On (default, can disable per-request) |
-| `qwen3.5-122b-no-thinking` | Off (faster for simple tasks) |
+| `openai/qwen3.5-122b` | Off (faster for simple tasks) |
+| `openai/qwen3.5-122b-thinking` | On (chain-of-thought; use `max_tokens >= 4096`) |
 
 Change the API key in `litellm-config.yaml` (`master_key`) before exposing to a network.
 
