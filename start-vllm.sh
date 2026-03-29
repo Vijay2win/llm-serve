@@ -19,6 +19,11 @@ fi
 # GB10 unified memory: model mmap (~72 GB) stays in page cache after the previous
 # run exits. vLLM's startup check counts this as "used" and aborts. Drop caches
 # to restore full pool visibility (~119 GiB). Requires passwordless sudo — see README.
+# Switch LiteLLM config to Qwen backend and reload
+echo "[$(date)] Switching LiteLLM routing → Qwen3.5-122B (port 8000)..."
+ln -sf litellm-config-qwen.yaml "$HOME/llm-serve/litellm-config.yaml"
+systemctl --user reload-or-restart litellm.service 2>/dev/null || true
+
 echo "[$(date)] Dropping page cache..."
 sudo sysctl vm.drop_caches=3
 
@@ -29,8 +34,8 @@ exec "$HOME/miniconda3/envs/llm/bin/python" -m vllm.entrypoints.openai.api_serve
     --host 0.0.0.0 \
     --port 8000 \
     --served-model-name "qwen3.5-122b" \
-    --max-model-len 204800 \
-    --gpu-memory-utilization 0.85 \
+    --max-model-len 1048576 \
+    --gpu-memory-utilization 0.90 \
     --moe-backend cutlass \
     --attention-backend flashinfer \
     --enforce-eager \

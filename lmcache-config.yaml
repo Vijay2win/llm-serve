@@ -1,0 +1,16 @@
+# LMCache — disk-backed KV prefix cache
+# Persists computed KV blocks to NVMe across vLLM restarts.
+# Loaded via LMCACHE_CONFIG_FILE env var.
+
+chunk_size: 256
+
+# CPU RAM tier (fast write buffer, 8 GiB)
+local_cpu: true
+max_local_cpu_size: 8.0
+
+# NVMe disk tier (persistent, 50 GiB cap)
+local_disk: "/home/vijay/llm-serve/lmcache-store"
+max_local_disk_size: 50.0
+
+# Don't cache single decode steps — only full prefill chunks
+save_decode_cache: false

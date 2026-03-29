@@ -1,0 +1,17 @@
+#!/bin/bash
+# claude-local — Launch Claude Code routed through the local LiteLLM proxy
+#
+# Model routing (LiteLLM aliases):
+#   claude-sonnet-4-5  → MiniMax M2.5 230B (llama.cpp :8001, 196K ctx)
+#   claude-sonnet-4-6  → Qwen3.5-122B NVFP4 (vllm :8000, 1M ctx)
+#
+# Default: claude-sonnet-4-5 (MiniMax M2.5, currently active)
+#
+# Disables experimental betas (prevents interleaved-thinking from breaking tool use).
+
+#export CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1
+export ANTHROPIC_BASE_URL="http://localhost:4000"
+export ANTHROPIC_AUTH_TOKEN="sk-local-llm"
+export ANTHROPIC_API_KEY="sk-spark-llm"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="claude-sonnet-4-5"
+exec /home/vijay/.local/bin/claude --model claude-sonnet-4-5 "$@"

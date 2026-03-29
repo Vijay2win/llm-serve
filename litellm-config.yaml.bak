@@ -1,0 +1,130 @@
+model_list:
+  - model_name: qwen3.5-122b
+    litellm_params:
+      model: qwen3.5-122b
+      api_base: http://10.0.0.6:8000/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+    model_info:
+      description: "Qwen3.5-122B NVFP4 — thinking always on (vLLM default), fast responses"
+      max_input_tokens: 1048576
+      max_output_tokens: 32768
+      supports_vision: true
+
+  - model_name: qwen3.5-122b-thinking
+    litellm_params:
+      model: qwen3.5-122b
+      api_base: http://10.0.0.6:8000/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      extra_body:
+        chat_template_kwargs:
+          enable_thinking: true
+    model_info:
+      description: "Qwen3.5-122B NVFP4 — chain-of-thought reasoning enabled, use max_tokens >= 4096"
+      max_input_tokens: 1048576
+      max_output_tokens: 32768
+      supports_vision: true
+
+  # Claude Code Aliases
+  - model_name: claude-3-5-sonnet-20241022
+    litellm_params:
+      model: minimax-m2.5
+      api_base: http://10.0.0.6:8001/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      drop_params: true
+      max_tokens: 8192
+    model_info:
+      max_input_tokens: 196608
+      max_output_tokens: 8192
+      supports_vision: false
+
+  - model_name: claude-sonnet-4-6
+    litellm_params:
+      model: minimax-m2.5
+      api_base: http://10.0.0.6:8001/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      drop_params: true
+      max_tokens: 8192
+    model_info:
+      max_input_tokens: 196608
+      max_output_tokens: 8192
+      supports_vision: false
+
+  - model_name: claude-3-5-sonnet-latest
+    litellm_params:
+      model: minimax-m2.5
+      api_base: http://10.0.0.6:8001/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      drop_params: true
+      max_tokens: 8192
+    model_info:
+      max_input_tokens: 196608
+      max_output_tokens: 8192
+      supports_vision: false
+
+  - model_name: claude-3-5-sonnet-20240620
+    litellm_params:
+      model: minimax-m2.5
+      api_base: http://10.0.0.6:8001/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      drop_params: true
+      max_tokens: 8192
+    model_info:
+      max_input_tokens: 196608
+      max_output_tokens: 8192
+      supports_vision: false
+
+  # ── MiniMax M2.5 (230B MoE) — llama.cpp on port 8001 ──────────────────────
+  # NOTE: cannot run simultaneously with Qwen3.5-122B (both exceed 128 GB).
+  #       Stop vllm.service before starting minimax.service.
+  - model_name: minimax-m2.5
+    litellm_params:
+      model: minimax-m2.5
+      api_base: http://10.0.0.6:8001/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      drop_params: true
+      max_tokens: 8192
+    model_info:
+      description: "MiniMax M2.5 230B MoE UD-Q3_K_XL — 196K context, tq3_turbo KV cache (llama.cpp)"
+      max_input_tokens: 196608
+      max_output_tokens: 8192
+      supports_vision: false
+
+  # Claude Sonnet 4.5 aliases → MiniMax M2.5 (196K context window)
+  - model_name: claude-sonnet-4-5
+    litellm_params:
+      model: minimax-m2.5
+      api_base: http://10.0.0.6:8001/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      drop_params: true
+      max_tokens: 8192
+    model_info:
+      max_input_tokens: 196608
+      max_output_tokens: 8192
+      supports_vision: false
+
+  - model_name: claude-sonnet-4-5-20250514
+    litellm_params:
+      model: minimax-m2.5
+      api_base: http://10.0.0.6:8001/v1
+      api_key: "sk-spark-llm"
+      custom_llm_provider: "openai"
+      drop_params: true
+      max_tokens: 8192
+    model_info:
+      max_input_tokens: 196608
+      max_output_tokens: 8192
+      supports_vision: false
+
+general_settings:
+  master_key: "sk-local-llm"
+  disable_spend_logs: true
+  store_model_spend_logs: false
+  max_output_tokens: 8192

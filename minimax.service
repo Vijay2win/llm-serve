@@ -1,0 +1,23 @@
+[Unit]
+Description=llama.cpp — MiniMax M2.5 (230B MoE) UD-Q3_K_XL inference server
+After=network-online.target
+Wants=network-online.target
+# Prevents accidentally starting both models at once (they exceed 128 GB together)
+Conflicts=vllm.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/vijay/llm-serve
+ExecStart=/home/vijay/llm-serve/start-minimax.sh
+Restart=on-failure
+RestartSec=30
+TimeoutStartSec=600
+StandardOutput=append:/home/vijay/llm-serve/logs/minimax.log
+StandardError=append:/home/vijay/llm-serve/logs/minimax.log
+Environment=HOME=/home/vijay
+Environment=PATH=/home/vijay/llama.cpp-src/build/bin:/home/vijay/miniconda3/envs/llm/bin:/usr/local/cuda/bin:/usr/local/bin:/usr/bin:/bin
+# Ensure unified memory is fully visible to CUDA
+Environment=CUDA_VISIBLE_DEVICES=0
+
+[Install]
+WantedBy=default.target
